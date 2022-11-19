@@ -3,7 +3,7 @@ import { model, Schema } from 'mongoose';
 export const Cashier = model('Cashier', new Schema({
     openDate: {
         type: Date,
-        required: true,
+        default: Date.now,
     },
     closeDate: {
         type: Date,

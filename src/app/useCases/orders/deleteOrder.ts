@@ -11,7 +11,7 @@ export async function deleteOrder(req: Request, res: Response) {
 
         await Order.findByIdAndDelete(id);
 
-        return res.status(200).json({ status: 'success', message: 'Order deleted' });
+        return res.status(204).json({ status: 'success', message: 'Order deleted' });
 
     } catch (error) {
         return res.sendStatus(500);

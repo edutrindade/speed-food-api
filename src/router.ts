@@ -31,6 +31,13 @@ import { createOrder } from './app/useCases/orders/createOrder';
 import { updateOrder } from './app/useCases/orders/updateOrder';
 import { updateOrderStatus } from './app/useCases/orders/updateOrderStatus';
 import { deleteOrder } from './app/useCases/orders/deleteOrder';
+import { createUser } from './app/useCases/users/createUser';
+import { listUsers } from './app/useCases/users/listUsers';
+import { auth } from './app/useCases/users/auth';
+import { updateUsers } from './app/useCases/users/updateUsers';
+import { listCashiers } from './app/useCases/cashiers/listCashiers';
+import { openCashier } from './app/useCases/cashiers/openCashier';
+import { closeCashier } from './app/useCases/cashiers/closeCashier';
 
 
 // List categories
@@ -73,26 +80,22 @@ router.patch('/order/:id/status', updateOrderStatus);
 router.delete('/order/:id', deleteOrder);
 
 // List users
-router.get('/users', async (req, res) => {
-    res.send('List users');
-});
+router.get('/users', listUsers);
 
 // Create user
-router.post('/users', async (req, res) => {
-    res.send('Create user');
-});
+router.post('/users', createUser);
+
+// Authenticate user
+router.post('/users/login', auth);
+
+// Update user
+router.put('/user/:id', updateUsers);
 
 // List cashiers
-router.get('/cashiers', async (req, res) => {
-    res.send('List cashiers');
-});
+router.get('/cashiers', listCashiers);
 
 // Open cashier
-router.post('/cashiers', async (req, res) => {
-    res.send('Open cashier');
-});
+router.post('/cashiers', openCashier);
 
 // Close cashier
-router.put('/cashiers/:id', async (req, res) => {
-    res.send('Close cashier');
-});
+router.put('/cashier/:id', closeCashier);
