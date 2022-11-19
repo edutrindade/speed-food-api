@@ -10,7 +10,11 @@ export async function updateOrder(req: Request, res: Response) {
         if (status === "DONE")
             return res.status(400).json({ error: "You can't update a DONE order" });
 
-        const order = await Order.findByIdAndUpdate(id, { table, products });
+        let total: Number = products.reduce((total: Number, product: any) => {
+            return Number(total) + Number(product.quantity) * Number(product.price);
+        }, 0);
+
+        const order = await Order.findByIdAndUpdate(id, { table, products, total });
 
         if (!order) {
             return res.sendStatus(404);
@@ -19,7 +23,7 @@ export async function updateOrder(req: Request, res: Response) {
         return res.status(200).json({
             status: 'success',
             message: 'Order updated successfully',
-            data: req.body
+            data: order
         });
     } catch (error) {
         return res.sendStatus(500);

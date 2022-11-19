@@ -22,6 +22,10 @@ export const Order = model('Order', new Schema({
         }],
         required: true,
     },
+    total: {
+        type: Number,
+        default: 0,
+    },
     status: {
         type: String,
         enum: ['WAITING', 'IN_PRODUCTION', 'DONE'],
